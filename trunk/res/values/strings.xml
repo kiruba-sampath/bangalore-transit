@@ -3,5 +3,7 @@
 
     <string name="hello">Hello World, HomeActivity!</string>
     <string name="app_name">BangaloreTransit2.0</string>
+    <string name="from_spinner">Select from</string>
+    <string name="to_spinner">Select from</string>
 
 </resources>
