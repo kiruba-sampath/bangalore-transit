@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.res.Resources;
+import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -14,12 +16,14 @@ public class AirportActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.airport);
-        
-        
-        /* List view */
-        ListView airport_list = (ListView) findViewById(R.id.airport_list);
-        ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
-        HashMap<String,String> temp = new HashMap<String,String>();
+       /* DB connection */
+       DBAdapter airportdb = new DBAdapter(getApplicationContext());
+       airportdb.open();
+       airportdb.insert("one", "hops", "time", "to_time", "fare130", "fare150", "fare165", "fare180", "fare200", "fare240");
+       /* List view */
+       ListView airport_list = (ListView) findViewById(R.id.airport_list);
+       ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
+       HashMap<String,String> temp = new HashMap<String,String>();
        temp.put("pen","MONT Blanc");
        temp.put("price", "200.00$");
        list.add(temp);
@@ -48,6 +52,11 @@ public class AirportActivity extends Activity {
     		   new int[] {R.id.number_text,R.id.route_text});
        
        airport_list.setAdapter(adapter);
+       
+       /* parse the XML */
+       Resources res = getResources();
+       XmlResourceParser xpp = res.getXml(R.xml.airportshuttle);
+       
     }
     
     
