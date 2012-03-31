@@ -31,7 +31,13 @@
          android:layout_width="fill_parent"
          android:layout_height="wrap_content"
          android:text="Find Shuttles"
-      />
+     />
+     
+     <ListView
+         android:id="@+id/airport_list"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content">   
+     </ListView>
          
       
 </LinearLayout>
