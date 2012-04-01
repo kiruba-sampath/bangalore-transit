@@ -101,15 +101,18 @@ public class DBAdapter {
     public String[] getHops()
     {
     	String[] hops = new String[200];
+    	String start;
+    	String hopstring;
+    	
         Cursor resultCursor = db.query(DATABASE_TABLE, new String[] {KEY_START, KEY_HOPS} , null, null, null, null, null);
         no_hops = 0;
         if(!(resultCursor == null)) {
         	resultCursor.moveToFirst();  
         	while(!(resultCursor.isAfterLast())){
-        	    String start = resultCursor.getString(0);
+        	    start = resultCursor.getString(0);
         	    addIfNotExists(hops, start);
         	    
-        	    String hopstring  =  resultCursor.getString(1).trim();
+        	    hopstring  =  resultCursor.getString(1).trim();
         	    String[] templist = hopstring.split(";");
         	    for(int temp = 0; temp < templist.length; temp++)
         	    {
@@ -117,13 +120,77 @@ public class DBAdapter {
         	    }
         		resultCursor.moveToNext();
         	}	
-        }
-        hops[no_hops] = "Internatonal Airport";
-        no_hops++;
+        }        
         java.util.Arrays.sort(hops, 0, no_hops);
+        resultCursor.close();
         return hops;
     }
     
+    /* Get Bus routes */
+    /* Data stored as Start To airport */
+    public String[] getShuttles(String from, String to, boolean from_airport) {
+    	String[] shuttles = new String[50];
+    	int no_shuttles = 0;
+    	String route;
+    	String start;
+    	String hopstring;
+    	
+    	Cursor resultCursor = db.query(DATABASE_TABLE, new String[] {KEY_ROUTE, KEY_START, KEY_HOPS} , 
+    			                       null, null, null, null, null);
+    	if(!(resultCursor == null)) {
+    		resultCursor.moveToFirst();  
+        	while(!(resultCursor.isAfterLast())){
+        		route = resultCursor.getString(0);
+        		start = resultCursor.getString(1);
+        		hopstring = resultCursor.getString(2);
+        		hopstring = start + ";" + hopstring;
+         		String[] hoplist = hopstring.split(";");
+                
+         		if(isPresentArray(hoplist, from) && isPresentArray(hoplist, to)) {
+                	if(isPresentBefore(hoplist, from, to))
+                	{
+                		String builder = route + ";" + start + " to International Airport";
+                		shuttles[no_shuttles] = builder;
+                	}
+                	else
+                	{
+                		String builder = route + ";" + "International Airport to " + start;
+                		shuttles[no_shuttles] = builder;
+                	}
+                	no_shuttles = no_shuttles + 1;
+                }
+                resultCursor.moveToNext();
+        	} //end while
+    	}
+    	resultCursor.close();
+    	if(shuttles[0] == null)
+    		shuttles[0] = "Sorry!; No shuttles available";
+    	return shuttles;
+    }
+    
+    /* is present in Array */
+    private boolean isPresentArray(String[] str_array, String ip)
+    {
+        for(int i = 0; i < str_array.length; i++) {
+    		if(str_array[i].equals(ip))
+    			return true;
+    		if(str_array[i] == null)
+    			break;
+    	}
+    	return false;
+    }
+    
+    /* is first parameter present before second */
+    private boolean isPresentBefore(String[] str_arr, String from, String to) {
+    	for(int i = 0 ; i < str_arr.length; i++)
+    	{
+    		if(str_arr[i].equals(from))
+    			return true;
+    		else if(str_arr[i].equals(to))
+    			return false;
+    	}
+    	return true;
+    }
     /* add to string array */
     private void addIfNotExists(String[] addHere, String toAdd )
     {
