@@ -16,10 +16,13 @@ public class AirportActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.airport);
-       /* DB connection */
-       DBAdapter airportdb = new DBAdapter(getApplicationContext());
-       airportdb.open();
-       airportdb.insert("one", "hops", "time", "to_time", "fare130", "fare150", "fare165", "fare180", "fare200", "fare240");
+        
+        DBAdapter airportdb = new DBAdapter(getApplicationContext());
+        airportdb.open();
+        airportdb.getHops();
+        
+       
+       
        /* List view */
        ListView airport_list = (ListView) findViewById(R.id.airport_list);
        ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();

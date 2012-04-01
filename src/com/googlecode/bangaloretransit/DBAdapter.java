@@ -2,11 +2,13 @@ package com.googlecode.bangaloretransit;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DBAdapter {
     private static final String DATABASE_NAME = "bang_transit.db";
@@ -17,6 +19,7 @@ public class DBAdapter {
     // COLUMN NAMES
     public static final String KEY_ID = "_id";
     public static final String KEY_ROUTE = "route";
+    public static final String KEY_START = "start";
     public static final String KEY_HOPS = "hops";
     public static final String KEY_TIME_FROM = "from_time";
     public static final String KEY_TIME_TO = "to_time";
@@ -32,6 +35,7 @@ public class DBAdapter {
     	"create table " + DATABASE_TABLE + " (" + 
     	KEY_ID + " integer primary key autoincrement, " + 
     	KEY_ROUTE + " varchar(100), " +
+    	KEY_START + " varchar(100)," +
     	KEY_HOPS + " text, " +
     	KEY_TIME_FROM + " text, " +
     	KEY_TIME_TO + " text, " +
@@ -68,13 +72,16 @@ public class DBAdapter {
     	db.close();
     }
     
+    /*** Airport Related ***/
+    
     /* Insert entry to database */
-    public long insert(String route, String hops, String from_time, String to_time, 
+    public long insert(String route, String start, String hops, String from_time, String to_time, 
     		           String fare130, String fare150, String fare165, String fare180, String fare200,
     		           String fare240)
     {
     	ContentValues newValues = new ContentValues();
     	newValues.put(KEY_ROUTE, route);
+    	newValues.put(KEY_START, start);
     	newValues.put(KEY_HOPS, hops);
     	newValues.put(KEY_TIME_FROM, from_time);
     	newValues.put(KEY_TIME_TO, to_time);
@@ -87,6 +94,30 @@ public class DBAdapter {
     	
     	// Insert the row
     	return db.insert(DATABASE_TABLE, null, newValues);
+    }
+    
+    /* get hops */
+    public String[] getHops()
+    {
+    	String[] hops = new String[100];
+        Cursor resultCursor = db.query(DATABASE_TABLE, new String[] {KEY_START, KEY_HOPS} , null, null, null, null, null);
+        
+        if(!(resultCursor == null)) {
+        	resultCursor.moveToFirst();  
+        	while(!(resultCursor.isAfterLast())){
+        	    String start = resultCursor.getString(0);
+        	    String hopstring  =  resultCursor.getString(1);
+        	    
+        		resultCursor.moveToNext();
+        	}	
+        }
+        return hops;
+    }
+    
+    /*** Airport related ends ***/
+    /* Flush the DB */
+    public boolean flush() {
+        return db.delete(DATABASE_TABLE, null , null) > 0;	
     }
     
     // Delete the entry
