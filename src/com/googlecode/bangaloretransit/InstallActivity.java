@@ -63,17 +63,17 @@ public class InstallActivity extends Activity {
     	
     	for (int i = 0; i < nl.getLength(); i++) {
             Element item = (Element)nl.item(i);
-            String route_number = getValue(item, "number");
-            String start = getValue(item, "start");
-            String hops = getValue(item, "hops");
-            String from_bias = getValue(item, "frombias");
-            String to_bias = getValue(item, "fromdestination");
-            String fare130 = getValue(item, "fare_130");
-            String fare150 = getValue(item, "fare_150");
-            String fare165 = getValue(item, "fare_165");
-            String fare180 = getValue(item, "fare_180");
-            String fare200 = getValue(item, "fare_200");
-            String fare240 = getValue(item, "fare_240");
+            String route_number = getValue(item, "number").trim();
+            String start = getValue(item, "start").trim();
+            String hops = getValue(item, "hops").trim();
+            String from_bias = getValue(item, "frombias").trim();
+            String to_bias = getValue(item, "fromdestination").trim();
+            String fare130 = getValue(item, "fare_130").trim();
+            String fare150 = getValue(item, "fare_150").trim();
+            String fare165 = getValue(item, "fare_165").trim();
+            String fare180 = getValue(item, "fare_180").trim();
+            String fare200 = getValue(item, "fare_200").trim();
+            String fare240 = getValue(item, "fare_240").trim();
             airportdb.insert(route_number, start, hops,from_bias, to_bias, fare130, fare150, fare165, fare180, fare200, fare240);
         }
     	 return true;

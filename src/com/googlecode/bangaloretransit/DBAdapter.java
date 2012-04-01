@@ -15,6 +15,7 @@ public class DBAdapter {
     private static final String DATABASE_TABLE = "airport";
     
     private static final int DATABASE_VERSION = 1;
+    private int no_hops = 0;
     
     // COLUMN NAMES
     public static final String KEY_ID = "_id";
@@ -99,22 +100,44 @@ public class DBAdapter {
     /* get hops */
     public String[] getHops()
     {
-    	String[] hops = new String[100];
+    	String[] hops = new String[200];
         Cursor resultCursor = db.query(DATABASE_TABLE, new String[] {KEY_START, KEY_HOPS} , null, null, null, null, null);
-        
+        no_hops = 0;
         if(!(resultCursor == null)) {
         	resultCursor.moveToFirst();  
         	while(!(resultCursor.isAfterLast())){
         	    String start = resultCursor.getString(0);
-        	    String hopstring  =  resultCursor.getString(1);
+        	    addIfNotExists(hops, start);
         	    
+        	    String hopstring  =  resultCursor.getString(1).trim();
+        	    String[] templist = hopstring.split(";");
+        	    for(int temp = 0; temp < templist.length; temp++)
+        	    {
+        	        addIfNotExists(hops, templist[temp].trim());
+        	    }
         		resultCursor.moveToNext();
         	}	
         }
+        hops[no_hops] = "Internatonal Airport";
+        no_hops++;
+        java.util.Arrays.sort(hops, 0, no_hops);
         return hops;
     }
     
+    /* add to string array */
+    private void addIfNotExists(String[] addHere, String toAdd )
+    {
+    	int i = 0;
+    	for(i = 0; i < no_hops; i++)
+    	{
+    		if(addHere[i].equals(toAdd))
+    		    return;
+    	}
+    	addHere[no_hops] = toAdd;
+    	no_hops++;
+    }
     /*** Airport related ends ***/
+    
     /* Flush the DB */
     public boolean flush() {
         return db.delete(DATABASE_TABLE, null , null) > 0;	
