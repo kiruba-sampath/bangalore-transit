@@ -7,8 +7,10 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 
 public class AirportActivity extends Activity {
     /** Called when the activity is first created. */
@@ -17,10 +19,37 @@ public class AirportActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.airport);
         
+        /* get view elements */
+        Spinner from_spinner = (Spinner) findViewById(R.id.spinner_from);
+        Spinner to_spinner = (Spinner) findViewById(R.id.spinner_to);
+        
         DBAdapter airportdb = new DBAdapter(getApplicationContext());
         airportdb.open();
-        airportdb.getHops();
         
+        
+       /* From spinner */
+       String [] from_hops = airportdb.getHops();
+       ArrayAdapter <CharSequence> from_adapter =
+    	   new ArrayAdapter <CharSequence> (this, android.R.layout.simple_spinner_item );
+       from_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+       for(int gy = 0; gy < from_hops.length; gy++)
+       {
+    	   if(from_hops[gy] == null) break;
+    	   from_adapter.add(from_hops[gy]);
+       }
+       from_spinner.setAdapter(from_adapter);
+       
+       /* To spinner */
+       String [] to_hops = airportdb.getHops();
+       ArrayAdapter <CharSequence> to_adapter =
+    	   new ArrayAdapter <CharSequence> (this, android.R.layout.simple_spinner_item );
+       to_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+       for(int gy = 0; gy < to_hops.length; gy++)
+       {
+    	   if(to_hops[gy] == null) break;
+    	   to_adapter.add(to_hops[gy]);
+       }
+       to_spinner.setAdapter(to_adapter);
        
        
        /* List view */
