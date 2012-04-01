@@ -1,0 +1,158 @@
+<airportshuttle>
+  <bias>
+     <number> BIAS-4 </number>
+	 <start> HAL Main Gate </start>
+	 <hops> Chinmaiah Hospital ; Indiranagar Police station; Halsoor; Halsoor Lake ; Taj Residency; Lakeside Hospital; St.Johns Road; J.C.Nagara; Mekhri Circle; Hebbala; Kogilu Cross </hops>
+	 <frombias>0000;0500;0530;0600;0700;0730;0800;0830;0900;0930;1000;1030;1100;1300;1330;1400;1500;1600;1630;1700;1730;1800;1830;1900;2000;2030;2100;2130;2230;2300</frombias>
+	 <fromdestination> 0300;0400;0500;0530;0600;0700;0730;0800;0830;0900;1000;1100;1130;1200;1310;1400;1430;1500;1530;1600;1630;1700;1800;1830;1930;2000;2030;2100;2200</fromdestination>
+     <fare_130> Kogilu Cross; Hebbala </fare_130>
+     <fare_150> Mekhri Circle</fare_150>
+     <fare_165>  Taj Residency; Lakeside Hospital; St.Johns Road; J.C.Nagara</fare_165>
+     <fare_180> Chinmaiah Hospital ; Indiranagar Police station; Halsoor; Halsoor Lake; HAL Main Gate</fare_180>
+     <fare_200> </fare_200>
+     <fare_240> </fare_240>	 
+  </bias>
+  
+  <bias>
+     <number> BIAS-5 </number>
+	 <start> J.P.Nagara 6th Phase </start>
+	 <hops> Jayanagara 4th Block;Shanthinagara Bus Stand;Hotel Ramanashree;Hotel Woodlands;Bangalore Club; High Grounds; Le Meridian; Windsor Manor;Mekhri Circle; Hebbala; Kogilu Cross</hops>
+	 <frombias> 0010;0515;0555;0635;0715;0805;0845;0905;0925;1005;1045;1125;1210;1240;1320;1440;1615;1650;1730;1750;1810;1850;1955;2040;2125;2205;2225;2245
+ </frombias>
+	 <fromdestination> 0035;0400;0450;0520;0600;0640;0700;0720;0800;0840;0920;1000;1035;1115;1235;1410;1445;1525;1545;1605;1645;1725;1840;1920;2000;2020;2040;2200</fromdestination>
+     <fare_130> Kogilu Cross; Hebbala </fare_130>
+     <fare_150> Mekhri Circle</fare_150>
+     <fare_165> Shanthinagara Bus Stand;Hotel Ramanashree;Hotel Woodlands;Bangalore Club; High Grounds; Le Meridian; Windsor Manor </fare_165>
+     <fare_180> Jayanagara 4th Block; J.P.Nagara 6th Phase </fare_180>
+     <fare_200> </fare_200>
+     <fare_240> </fare_240>	 
+  </bias>
+  
+  <bias>
+     <number> BIAS-6</number>
+	 <start> Kadugodi Bus Station </start>
+	 <hops> Hope Farm; Whitefield Post Office; Siddapura; Marathahalli Bridge; HAL; Leela Palace; Royal Orchard; Domlur; Taj Residency; Lakeside Hospital; St.Johns Road; J.C.Nagara;Mekhri Circle; Hebbala; Kogilu Cross</hops>
+	 <frombias> 0730;0820;0920;1020;1120;1220;1520;1620;1720;1830;1930;2030;2130;2320</frombias>
+	 <fromdestination> 0600;0700;0800;0900;1300;1400;1500;1640;1740;1840;2050;2240 </fromdestination>
+     <fare_130> Kogilu Cross; Hebbala </fare_130>
+     <fare_150> Mekhri Circle</fare_150>
+     <fare_165> Taj Residency; Lakeside Hospital; St.Johns Road; J.C.Nagara</fare_165>
+     <fare_180> HAL; Leela Palace; Royal Orchard; Domlur</fare_180>
+     <fare_200> Hope Farm; Whitefield Post Office; Siddapura; Marathahalli Bridge; Kadugodi Bus Station</fare_200>
+     <fare_240> </fare_240>	 
+  </bias>
+  
+  <bias>
+     <number> BIAS-7 </number>
+	 <start> H.S.R. Layout (BDA Complex) </start>
+	 <hops> Madiwala; Forum/Checkpost; Shanthinagara Bus Stand; Richmond Circle;Chancery Pavillion; Bowring Institute; Bangalore Club; Indian Express; Vasantanagara; RM Guttahalli;Mekhri Circle; Hebbala; Kogilu Cross</hops>
+	 <frombias> 0030;0610;0710;0810;0930;1020;1120;1230;1320;1420;1520;1620;1720;1820;1920;2050;2120;2240;2330 </frombias>
+	 <fromdestination> 0430;0525;0620;0710;0820;0920;1030;1130;1220;1320;1420;1520;1620;1720;1830;1930;2040;2140;2245</fromdestination>
+     <fare_130> Kogilu Cross; Hebbala </fare_130>
+     <fare_150> Mekhri Circle</fare_150>
+     <fare_165> Shanthinagara Bus Stand; Richmond Circle;Chancery Pavillion; Bowring Institute; Bangalore Club; Indian Express; Vasantanagara; RM Guttahalli</fare_165>
+     <fare_180> Madiwala; Forum/Checkpost;H.S.R. Layout (BDA Complex)</fare_180>
+     <fare_200> </fare_200>
+     <fare_240> </fare_240>	 
+  </bias>
+  
+  <bias>
+     <number> BIAS-7A</number>
+	 <start> H.S.R. Layout (BDA Complex) </start>
+	 <hops> Koramangala; BDA Complex; Koramangala Sony World ; Dell Software Complex; Domlur; M.G.Road; GPO; Windsor Manor; RM.Guttahalli;Mekhri Circle; Hebbala; Kogilu Cross</hops>
+	 <frombias> 0840;0945;1050;1150;1550;1650;1800;1845;1950;2050;2200</frombias>
+	 <fromdestination> 0640;0740;0850;0950;1350;1450;1550;1650;1650;1750;1855;2020 </fromdestination>
+      <fare_130> Kogilu Cross; Hebbala </fare_130>
+     <fare_150> Mekhri Circle</fare_150>
+     <fare_165> Domlur; M.G.Road; GPO; Windsor Manor; RM.Guttahalli</fare_165>
+     <fare_180> Koramangala; BDA Complex; Koramangala Sony World ; Dell Software Complex;Domlur;H.S.R. Layout (BDA Complex) </fare_180>
+     <fare_200> </fare_200>
+     <fare_240> </fare_240>	 
+  </bias>
+  
+  <bias>
+     <number> BIAS-8 </number>
+	 <start> Electronic City </start>
+	 <hops> Bommanahalli; Central Silk Board; Agara;Marathahalli Ring Road; K.R.Puram Railway Station; Kalyana Nagara;Mekhri Circle; Hebbala; Kogilu Cross</hops>
+	 <frombias> 0040;0600;0715;0800;0840;0925;1010;1055;1135;1240;1355;15351620;1705;1745;1820;1845;1935;2015;2100;2145;2230;2315;2355
+</frombias>
+	 <fromdestination> 0300;0505;0550;0630;0730;0815;0855;1105;1220;1305;1350;1430;1515;1600;1645;1745;1830;1915;2015;2130;2230</fromdestination>
+      <fare_130> Kogilu Cross; Hebbala </fare_130>
+     <fare_150> Mekhri Circle</fare_150>
+     <fare_165> K.R.Puram Railway Station; Kalyana Nagara</fare_165>
+     <fare_180> Central Silk Board; Agara;Marathahalli Ring Road</fare_180>
+     <fare_200> </fare_200>
+     <fare_240> Bommanahalli;Electronic City</fare_240>	 
+  </bias>
+  
+  <bias>
+     <number> BIAS-8A </number>
+	 <start> Kuvempu Nagar (BTMLayout) </start>
+	 <hops> Central Silk Board; Agara;Marathahalli Ring Road; K.R.Puram Railway Station; Kalyana Nagara; Mekhri Circle; Hebbala; Kogilu Cross</hops>
+	 <frombias> 0530;0900;0930;1030;1115;1500;1640;1805;1905;2200;2335 </frombias>
+	 <fromdestination> 0630;0710;0810;0845;1215;1345;1545;1645;1955;2050;2120</fromdestination>
+      <fare_130> Kogilu Cross; Hebbala </fare_130>
+     <fare_150> Mekhri Circle</fare_150>
+     <fare_165> K.R.Puram Railway Station; Kalyana Nagara</fare_165>
+     <fare_180> Central Silk Board; Agara;Marathahalli Ring Road;Kuvempu Nagar (BTMLayout) </fare_180>
+     <fare_200> </fare_200>
+     <fare_240> </fare_240>	 
+  </bias>
+  
+  <bias>
+     <number> BIAS-9 </number>
+	 <start> Majestic/ KBS </start>
+	 <hops> Shivananda Circle/Central; Grand Ashoka; Windsor Manner; R.M. Guttahalli; Mekhri Circle; Hebbala; Kogilu Cross</hops>
+	 <frombias> 0010;0020;0050;0150;0105;0135;0230;0425;0455;0500;0520;0530;0550;0620;0645;0735;0755;0825;0840;0850;0920;0950;1015;1045;1105;1135;1150;1200;1200;1230;1300;1325;1340;1355;1425;1435;1445;1520;1550;1615;1630;1655;1705;1725;1735;1800;1830;1900;1925;1955;2025;2050;;2120;2150;2155;2215;2315</frombias>
+	 <fromdestination> 0010;0105;0300;0330;0355;0410;0425;0455;0520;0530;0600;0630;0700;0730;0800;0825;0850;0900;0920;0950;1000;1015;1030;1045;1100;1115;1140;1205;1230;1300;1315;1325;1355;1425;1440;1450;1505;1520;1550;1600;1615;1640;1645;1700;1715;1740;1830;1900;1925;1935;1955;2025;2050;2150;2230;2300;2340</fromdestination>
+      <fare_130> Kogilu Cross; Hebbala </fare_130>
+     <fare_150> Mekhri Circle</fare_150>
+     <fare_165> Shivananda Circle/Central; Grand Ashoka; Windsor Manner; R.M. Guttahalli;Majestic/ KBS</fare_165>
+     <fare_180> </fare_180>
+     <fare_200> </fare_200>
+     <fare_240> </fare_240>	 
+  </bias>
+  
+  <bias>
+     <number> BIAS-10 </number>
+	 <start> MCTC Bus Station </start>
+	 <hops> Vijaynagar; Basaveswaranagar; Modi Hospital ; Navarang ; Malleshwaram;Mekhri Circle; Hebbala; Kogilu Cross</hops>
+	 <frombias>  0945;1810;1945</frombias>
+	 <fromdestination>0710 </fromdestination>
+      <fare_130> Kogilu Cross; Hebbala </fare_130>
+     <fare_150> Mekhri Circle</fare_150>
+     <fare_165> Basaveswaranagar; Modi Hospital ; Navarang ; Malleshwaram </fare_165>
+     <fare_180> Vijaynagar; MCTC Bus Station </fare_180>
+     <fare_200> </fare_200>
+     <fare_240> </fare_240>	 
+  </bias>
+  
+  <bias>
+     <number> BIAS-11 </number>
+	 <start>  Chikkalasandra Bus Stand  </start>
+	 <hops> Padmanabhanagara; Kathariguppe; Hosakerehalli Cross; PES College; BHEL Deepanjali Nagara;Vijayanagara; Navarang;Malleshwaram ; Sadashiv Nagara; Bashyam Circle;Mekhri Circle; Hebbala; Kogilu Cross </hops>
+	 <frombias> 0635;0750;0830;1030;1125;1220;1300;1520;1620;1720;1830;2030;2130;2210;2330 </frombias>
+	 <fromdestination> 0430;0520;0600;0800;0900;1000;1050;1300;1400;1500;1620;1850;2000;2120 </fromdestination>
+     <fare_130> Kogilu Cross; Hebbala </fare_130>
+     <fare_150> Mekhri Circle</fare_150>
+     <fare_165> Navarang;Malleshwaram ; Sadashiv Nagara; Bashyam Circle </fare_165>
+     <fare_180> Padmanabhanagara; Kathariguppe; Hosakerehalli Cross; PES College; BHEL Deepanjali Nagara;Vijayanagara; Chikkalasandra Bus Stand</fare_180>
+     <fare_200> </fare_200>
+     <fare_240> </fare_240>	 
+  </bias>
+  
+  <bias>
+     <number> BIAS-12 </number>
+	 <start>Kuvempu Nagara (BTM Layout) </start>
+	 <hops> J.P.Nagara Phase III;Jayangara 9th Block East;Jayanagar Bus Station;Vijaya College; Minerva Circle; Corporation; Kasturba Road; Basaveshwara Circle;Mekhri Circle; Hebbala; Kogilu Cross</hops>
+	 <frombias> 0540;0620;0655;0735;0825;0850;0945;1030;1105;1145;1500;1540;1600;1635;1710;1830;1930;2015;2035;2055;2145;2305;2350</frombias>
+	 <fromdestination> 0055;0430;0510;0545;0620;0645;0740;0820;0900;0940;1240;1310;1345;1415;1505;1625;1705;1745;1805;1840;1940;2100;2150</fromdestination>
+     <fare_130> Kogilu Cross; Hebbala </fare_130>
+     <fare_150> Mekhri Circle</fare_150>
+     <fare_165>  Corporation; Kasturba Road; Basaveshwara Circle </fare_165>
+     <fare_180> Jayangara 9th Block East;Jayanagar Bus Station;Vijaya College; Minerva Circle </fare_180>
+     <fare_200> J.P.Nagara Phase III; Kuvempu Nagara (BTM Layout)</fare_200>
+     <fare_240> </fare_240>	 
+  </bias>
+  
+</airportshuttle>
