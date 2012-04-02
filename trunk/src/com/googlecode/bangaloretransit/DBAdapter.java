@@ -168,6 +168,109 @@ public class DBAdapter {
     	return shuttles;
     }
     
+    /* Shuttle information */ 
+    public String getShuttleInfo(String route, boolean from_airport)
+    {
+    	String shuttle_info = "";
+    	
+    	String start;
+    	String hopstring;
+    	String fromtime;
+    	String totime;
+    	String fareone;
+    	String faretwo;
+    	String farethree;
+    	String farefour;
+    	String farefive;
+    	String faresix;
+    	
+    	Cursor resultCursor = db.query(DATABASE_TABLE, null , 
+    			"route = ?", new String[] {route}, null, null, null);
+    	
+    	if(!(resultCursor == null)) {
+    		resultCursor.moveToFirst();  
+        	while(!(resultCursor.isAfterLast())) {
+        		start = resultCursor.getString(2);
+        		hopstring = resultCursor.getString(3);
+        		fromtime = resultCursor.getString(4);
+        		totime = resultCursor.getString(5);
+        		fareone = resultCursor.getString(6);
+        		faretwo = resultCursor.getString(7);
+        		farethree = resultCursor.getString(8);
+        		farefour = resultCursor.getString(9);
+        		farefive = resultCursor.getString(10);
+        		faresix = resultCursor.getString(10);
+        		
+        		shuttle_info += route + "::";
+        		Log.d("DEBUG", start);
+        		
+        		/* get board */
+        		if(from_airport)
+        			shuttle_info += "International Airport to " + start + "::";
+        		else
+        			shuttle_info += start + "to International Airport" + "::";
+        		
+        		/* get timings */
+        		if(from_airport)
+        			shuttle_info += formatTime(fromtime) + "::";
+        		else
+        			shuttle_info += formatTime(totime) + "::";
+        		
+        		/* get stages */
+        		if(from_airport)
+        		  hopstring = reverse_string(hopstring) + start;
+                else
+                  hopstring = start + ";" + hopstring;
+        		
+        		String hoplist[] = hopstring.split(";");
+        		shuttle_info += hoplist[0] + "::" + " " + "::";
+        		
+        		for(int hy = 1; hy < hoplist.length-1; hy++) {
+        			if(fareone.indexOf(hoplist[hy]) != -1)
+        		        shuttle_info += hoplist[hy] + "::" + "Rs. 130" + "::";
+        			else if(faretwo.indexOf(hoplist[hy]) != -1)
+        		        shuttle_info += hoplist[hy] + "::" + "Rs. 150" + "::";
+        			else if(farethree.indexOf(hoplist[hy]) != -1)
+        		        shuttle_info += hoplist[hy] + "::" + "Rs. 165" + "::";
+        			else if(farefour.indexOf(hoplist[hy]) != -1)
+        		        shuttle_info += hoplist[hy] + "::" + "Rs. 180" + "::";
+        			else if(farefive.indexOf(hoplist[hy]) != -1)
+        		        shuttle_info += hoplist[hy] + "::" + "Rs. 200" + "::";
+        			else if(faresix.indexOf(hoplist[hy]) != -1)
+        		        shuttle_info += hoplist[hy] + "::" + "Rs. 240" + "::";
+        		}
+        		
+        		shuttle_info += hoplist[hoplist.length-1] + "::" + " " + "::";
+        		
+        		resultCursor.moveToNext();
+        	}
+    	}
+    	return shuttle_info;
+    	
+    }
+    /* format time */
+    private String formatTime(String time)
+    {
+    	String[] timelist = time.split(";");
+    	String to_return ="";
+    	for(int jy = 0; jy < timelist.length; jy++)
+    	{
+    		to_return += " " + timelist[jy] + " ,";
+    	}
+    	return to_return;
+    }
+    /* reverse the string by ;*/
+    private String reverse_string(String strip)
+    {
+    	String[] strlist = strip.split(";");
+    	String to_return = "";
+    	for(int jk = strlist.length - 1; jk >=0 ; jk--)
+    	{
+    		to_return += strlist[jk] + ";";
+    	}
+    	return to_return;
+    }
+    
     /* is present in Array */
     private boolean isPresentArray(String[] str_array, String ip)
     {

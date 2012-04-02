@@ -5,16 +5,19 @@
     android:orientation="vertical" >
 
     <TextView
+        android:id = "@+id/route_display"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Route number" />
     
     <TextView
+        android:id = "@+id/board_display"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Route display"/>
     
     <TextView
+        android:id = "@+id/time_display"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Timings"/>
