@@ -7,7 +7,10 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="From" />
+        android:text="From" 
+        android:textColor="#FFFF00"
+        android:gravity="center"
+        android:textSize="14sp"/>
     
      <Spinner 
         android:id="@+id/spinner_from"
@@ -18,7 +21,10 @@
      <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="To" />
+        android:text="To" 
+        android:textColor="#FFFF00"
+        android:gravity="center"
+        android:textSize="14sp"/>
     
      <Spinner 
         android:id="@+id/spinner_to"
@@ -31,6 +37,7 @@
          android:layout_width="fill_parent"
          android:layout_height="wrap_content"
          android:text="Find Shuttles"
+         android:padding="10sp"
      />
      
      <ListView

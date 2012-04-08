@@ -11,6 +11,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class DBAdapter {
+	
+	/* Consumed by other classes to determine the direction */
+	public boolean direction_from = true;
+	
     private static final String DATABASE_NAME = "bang_transit.db";
     private static final String DATABASE_TABLE = "airport";
     
@@ -128,7 +132,7 @@ public class DBAdapter {
     
     /* Get Bus routes */
     /* Data stored as Start To airport */
-    public String[] getShuttles(String from, String to, boolean from_airport) {
+    public String[] getShuttles(String from, String to) {
     	String[] shuttles = new String[50];
     	int no_shuttles = 0;
     	String route;
@@ -151,11 +155,13 @@ public class DBAdapter {
                 	{
                 		String builder = route + ";" + start + " to International Airport";
                 		shuttles[no_shuttles] = builder;
+                		this.direction_from = false;
                 	}
                 	else
                 	{
                 		String builder = route + ";" + "International Airport to " + start;
                 		shuttles[no_shuttles] = builder;
+                		this.direction_from = true;
                 	}
                 	no_shuttles = no_shuttles + 1;
                 }
@@ -199,16 +205,15 @@ public class DBAdapter {
         		farethree = resultCursor.getString(8);
         		farefour = resultCursor.getString(9);
         		farefive = resultCursor.getString(10);
-        		faresix = resultCursor.getString(10);
+        		faresix = resultCursor.getString(11);
         		
         		shuttle_info += route + "::";
-        		Log.d("DEBUG", start);
         		
         		/* get board */
         		if(from_airport)
-        			shuttle_info += "International Airport to " + start + "::";
+        			shuttle_info += "International Airport TO " + start + "::";
         		else
-        			shuttle_info += start + "to International Airport" + "::";
+        			shuttle_info += start + " TO International Airport" + "::";
         		
         		/* get timings */
         		if(from_airport)
@@ -223,9 +228,12 @@ public class DBAdapter {
                   hopstring = start + ";" + hopstring;
         		
         		String hoplist[] = hopstring.split(";");
-        		shuttle_info += hoplist[0] + "::" + " " + "::";
-        		
-        		for(int hy = 1; hy < hoplist.length-1; hy++) {
+        		int start_pos = 1;
+        		if(from_airport)
+        		  shuttle_info += hoplist[0] + "::" + " " + "::";
+        		else
+        		   start_pos = 0;
+        		for(int hy = start_pos; hy < hoplist.length; hy++) {
         			if(fareone.indexOf(hoplist[hy]) != -1)
         		        shuttle_info += hoplist[hy] + "::" + "Rs. 130" + "::";
         			else if(faretwo.indexOf(hoplist[hy]) != -1)
@@ -238,13 +246,14 @@ public class DBAdapter {
         		        shuttle_info += hoplist[hy] + "::" + "Rs. 200" + "::";
         			else if(faresix.indexOf(hoplist[hy]) != -1)
         		        shuttle_info += hoplist[hy] + "::" + "Rs. 240" + "::";
+        			else 
+        				shuttle_info += hoplist[hy] + "::" + " " + "::";
         		}
-        		
-        		shuttle_info += hoplist[hoplist.length-1] + "::" + " " + "::";
-        		
+       
         		resultCursor.moveToNext();
         	}
     	}
+    	resultCursor.close();
     	return shuttle_info;
     	
     }
@@ -309,8 +318,8 @@ public class DBAdapter {
     /*** Airport related ends ***/
     
     /* Flush the DB */
-    public boolean flush() {
-        return db.delete(DATABASE_TABLE, null , null) > 0;	
+    public void flush() {
+        db.delete(DATABASE_TABLE, null, null);	
     }
     
     // Delete the entry
@@ -345,6 +354,7 @@ public class DBAdapter {
 
 		@Override
 		public void onCreate(SQLiteDatabase _db) {
+		    _db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE + ";");
 		    _db.execSQL(DATABASE_CREATE);
 		}
 

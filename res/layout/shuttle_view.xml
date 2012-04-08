@@ -8,24 +8,35 @@
         android:id = "@+id/route_display"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Route number" />
+        android:textColor="#00FFFF"
+        android:textSize="15dp"
+        android:gravity="center"
+        android:padding="10dp"/>
     
     <TextView
         android:id = "@+id/board_display"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Route display"/>
+        android:background="#FFFFFF"
+        android:textColor="#FF0000"
+        android:textSize="14dp"
+        android:padding="10dp"
+        android:gravity="center"/>
     
     <TextView
         android:id = "@+id/time_display"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Timings"/>
+        android:gravity="center"
+        android:textColor="#FFFF00"
+        android:textSize="14dp"
+        android:padding="5dp"/>
 
      <ListView
          android:id="@+id/shuttle_list"
          android:layout_width="fill_parent"
-         android:layout_height="wrap_content">   
+         android:layout_height="wrap_content"
+         android:padding="5dp">   
      </ListView>
      
 </LinearLayout>
