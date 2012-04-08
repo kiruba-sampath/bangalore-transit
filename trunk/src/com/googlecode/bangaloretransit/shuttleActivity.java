@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -15,6 +16,9 @@ public class shuttleActivity extends Activity {
 	private TextView route_text;
 	private TextView board_text;
 	private TextView time_text;
+	
+	private String route;
+	private boolean from_airport = true;
 	
 	private DBAdapter airportdb;
 	private int itr = 0;
@@ -31,9 +35,14 @@ public class shuttleActivity extends Activity {
         time_text = (TextView) findViewById(R.id.time_display);
         shuttle_list = (ListView) findViewById(R.id.shuttle_list);
         
+        /* get data from Intent */
+        Intent result = getIntent();
+        route = result.getExtras().getString("route");
+        from_airport = result.getExtras().getBoolean("direction");
+        
         airportdb = new DBAdapter(getApplicationContext());
         airportdb.open();
-        String response = airportdb.getShuttleInfo("BIAS-4", false);
+        String response = airportdb.getShuttleInfo(route, from_airport);
         String[] responselist = response.split("::");
         
         route_text.setText(responselist[itr++]);
@@ -49,15 +58,7 @@ public class shuttleActivity extends Activity {
            temp.put("fare", responselist[itr++]);
            list.add(temp);
         }
-        /* temp.clear();
-  	    temp.put("hop", "hop");
-        temp.put("fare", "fare");
-        list.add(temp);
         
-        temp.clear();
-  	    temp.put("hop", "hop");
-        temp.put("fare", "fare");
-        list.add(temp); */
         
         SimpleAdapter adapter = new SimpleAdapter(
       		   getBaseContext(),
@@ -68,5 +69,15 @@ public class shuttleActivity extends Activity {
          
          shuttle_list.setAdapter(adapter);
 
+    }
+    
+    public void onStop() {
+    	super.onStop();
+    	airportdb.close();
+    }
+    
+    public void onDestroy() {
+    	super.onDestroy();
+    	airportdb.close();
     }
 }

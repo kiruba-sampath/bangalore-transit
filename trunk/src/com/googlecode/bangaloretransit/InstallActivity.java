@@ -22,14 +22,22 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class InstallActivity extends Activity {
 	
 	private final String airport_url = "http://www.pixelpins.com/android/AirportShuttle.xml";
 	private DBAdapter airportdb; 
+	private ProgressDialog dialog;
 	
 	private static final String TAG = "DEBUG";
 	
@@ -37,26 +45,63 @@ public class InstallActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+       
         setContentView(R.layout.install_view);
-        
-        airportdb =  new DBAdapter(getApplicationContext());
         TextView xmltest = (TextView) findViewById(R.id.install_text);
+       
+
+        dialog = ProgressDialog.show(InstallActivity.this, "", 
+                "Loading Routes.. Please wait..", true);
         
-        /* DB connection */
-        airportdb.open();
-        //airportdb.insert("one", "hops", "time", "to_time", "fare130", "fare150", "fare165", "fare180", "fare200", "fare240");
+        if(!isNetworkAvailable())
+        {
+        	Toast.makeText(getBaseContext(), "Please connect to Internet..", Toast.LENGTH_LONG).show();
+        	finish();
+        }
+        else {
+        /* Thread part  */
+        final Handler handler=new Handler();
+        final Runnable r = new Runnable()
+        {
+            public void run() 
+            {
+               finish();
+            }
+        };
         
-        /* Populates airport DB */
-        PopulateAirportDB();
-        
-        
+        Thread xml_thread = new Thread() {
+        	@Override
+            public void run() {
+                try {
+                	/* Populates airport DB */
+                	airportdb =  new DBAdapter(getApplicationContext());
+                	/* DB connection */
+                    airportdb.open();
+                    PopulateAirportDB();
+                    Intent AirportIntent = new Intent(getBaseContext(), AirportActivity.class);
+                    startActivity(AirportIntent);
+                    handler.post(r);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        xml_thread.start();     
+        } 
+    }
+    
+    // override on stop
+    public void onStop()
+    {
+    	super.onStop();
+    	dialog.dismiss();
+    	airportdb.close();
     }
     
     /* Parse and populate airport routes */
     private boolean PopulateAirportDB(){
     	//HACK
     	airportdb.flush();
-    	
     	String xml = getXmlFromUrl(airport_url);
     	Document doc = getDomElement(xml); 
     	NodeList nl = doc.getElementsByTagName("bias");
@@ -92,14 +137,18 @@ public class InstallActivity extends Activity {
             xml = EntityUtils.toString(httpEntity);
  
         } catch (UnsupportedEncodingException e) {
+        	Toast.makeText(getBaseContext(), "Problem in connecting to server..", Toast.LENGTH_LONG).show();
+        	finish();
             e.printStackTrace();
         } catch (ClientProtocolException e) {
+        	Toast.makeText(getBaseContext(), "Problem in connecting to server..", Toast.LENGTH_LONG).show();
+        	finish();
             e.printStackTrace();
         } catch (IOException e) {
+        	Toast.makeText(getBaseContext(), "Problem in connecting to server..", Toast.LENGTH_LONG).show();
+        	finish();
             e.printStackTrace();
         }
-        // return XML
-        
         return xml;
     }
     
@@ -145,5 +194,12 @@ public class InstallActivity extends Activity {
                  }
              }
              return "";
-      }   
+      } 
+    
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager 
+              = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return (activeNetworkInfo != null);
+    }
 }
